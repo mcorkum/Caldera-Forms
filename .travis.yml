@@ -96,7 +96,6 @@ install:
   - cd $TRAVIS_BUILD_DIR && ls -al
   - rsync -avz --delete "$TRAVIS_BUILD_DIR" "$WP_FOLDER/wp-content/plugins/" --exclude=".git"
   - cd $WP_FOLDER/wp-content/plugins/Caldera-Forms && ls -al
-  - sleep 1000
 
   # Git clone plugins
   - cd $WP_FOLDER
