@@ -93,7 +93,7 @@ install:
   - wp rewrite structure '/%postname%/' --hard
 
   # Copy Caldera to NGROK accessible site
-  - rsync -av $TRAVIS_BUILD_DIR $WP_FOLDER/wp-content/plugins/caldera-forms --exclude="/tmp" --exclude='$WP_FOLDER' --exclude='/bin' --exclude='/tools'
+  - ln -s $TRAVIS_BUILD_DIR/Caldera-Forms $WP_FOLDER/wp-content/plugins/caldera-forms/
   - cd $WP_FOLDER/wp-content/plugins/caldera-forms/ && ls -al
   - sleep 1000
 
