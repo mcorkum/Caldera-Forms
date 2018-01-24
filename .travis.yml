@@ -94,7 +94,7 @@ install:
 
   # Copy Caldera to NGROK accessible site
   - cd $TRAVIS_BUILD_DIR && ls -al
-  - rsync -avz --delete "$TRAVIS_BUILD_DIR" "$WP_FOLDER/wp-content/plugins/caldera-forms"
+  - rsync -avz --delete "$TRAVIS_BUILD_DIR" "$WP_FOLDER/wp-content/plugins/" --exclude=".git"
   - cd $WP_FOLDER/wp-content/plugins/caldera-forms/ && ls -al
   - sleep 1000
 
