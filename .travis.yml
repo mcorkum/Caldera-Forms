@@ -85,7 +85,7 @@ install:
   # install WordPress in the `wordpress` folder
   - cd $WP_FOLDER
   - wp core download --version=$WP_VERSION
-  - wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX" --extra-php="define( 'CGRKEY', '1a5c4ab1f9a65c6aac5d449136ff1bcd4b25ebdd' ); define( 'CGRGDID', '1b2bIuIb8fKZ4NoC7UHV4hoEmw8W0Levkw2h_tJwDryM' ); define( 'CGRLOCALAPIKEY', 'oC7Ub8fw8W0KZ4NoCHV4ho1Emw8W0' );"
+  - wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX"
   - wp core install --url="$NGROK_URL" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@$NGROKDOMAIN" --skip-email
   - wp core update-db
   - wp option update home $NGROK_URL
@@ -200,6 +200,6 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
-  - sleep 1800
+  # - sleep 1800
   # Run ghost inspector tests
   #- cd $WP_FOLDER && wp cgr run
