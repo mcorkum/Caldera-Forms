@@ -99,9 +99,8 @@ before_install:
 
 
 install:
-  - echo $GHOST
-  - if [ $GHOST == 1 ]; then
-      bin/install-ghost.sh
+  - if [[ "$GHOST" == 1 ]]; then
+      ./bin/install-ghost.sh;
     fi
 
 before_script:
