@@ -1,3 +1,9 @@
+# Create the databases that will be used in the tests
+mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
+
+# Install Gulp CLI
+npm install --global gulp-cli
+
 # Download json parser for determining ngrok tunnel
 wget https://stedolan.github.io/jq/download/linux64/jq
 chmod +x jq
@@ -67,5 +73,5 @@ sudo ln -s /etc/nginx/sites-available/$NGROKDOMAIN /etc/nginx/sites-enabled/
 sudo service php5-fpm restart
 sudo service nginx restart
 
-cd $WP_FOLDER && wp cgr import
+cd $WP_FOLDER && wp cgr import cd $TRAVIS_BUILD_DIR
 exit 0
