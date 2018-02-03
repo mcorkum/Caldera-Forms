@@ -56,7 +56,7 @@ cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache &&
 cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install --silent && gulp
 
 # Activate all downloaded plugins
-cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms && wp cgr import
+cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms
 
 # Copy NGINX config file, enables the site, and restart web server
 cd $TRAVIS_BUILD_DIR
@@ -66,3 +66,6 @@ sudo sed -e "s?%NGROKDOMAIN%?$NGROKDOMAIN?g" --in-place /etc/nginx/sites-availab
 sudo ln -s /etc/nginx/sites-available/$NGROKDOMAIN /etc/nginx/sites-enabled/
 sudo service php5-fpm restart
 sudo service nginx restart
+
+cd $WP_FOLDER && wp cgr import
+exit 0
