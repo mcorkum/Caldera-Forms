@@ -24,7 +24,6 @@ wp core install --url="$NGROK_URL" --title="Test" --admin_user="admin" --admin_p
 wp core update-db
 wp option update home $NGROK_URL
 wp option update siteurl $NGROK_URL
-wp rewrite structure '/%postname%/' --hard
 
 # Copy Caldera to NGROK accessible site
 rsync -avzp --delete "$TRAVIS_BUILD_DIR/" "$WP_FOLDER/wp-content/plugins/caldera-forms" --exclude=".git"
@@ -35,11 +34,29 @@ git clone https://github.com/CalderaWP/caldera-ghost-runner.git $WP_FOLDER/wp-co
 git clone https://github.com/calderawp/cf-connected-forms $WP_FOLDER/wp-content/plugins/cf-connected-forms
 git clone https://gitlab.com/caldera-labs/cf-result-diff-plugin.git $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin
 
+# Setup and activate cf-result-diff if php7
+# Install if php7
+case "$TRAVIS_PHP_VERSION" in
+  7.2|7.1|7.0|nightly)
+    cd $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin && composer install && composer update && cd $WP_FOLDER && wp plugin activate cf-result-diff-plugin
+    ;;
+  5.6|5.5|5.4|5.3)
+    echo "PHP version does not support cf-result-diff"
+    ;;
+  5.2)
+    echo "PHP version does not support cf-result-diff"
+    ;;
+  *)
+    echo "PHP version does not support cf-result-diff"
+    ;;
+esac
+
+# Setup caldera-ghost-runner and cf-connected-forms
+cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
+cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install --silent && gulp
 
 # Activate all downloaded plugins
-echo "hello"
 cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms && wp cgr import
-echo "hello2"
 
 # Copy NGINX config file, enables the site, and restart web server
 cd $TRAVIS_BUILD_DIR
@@ -49,7 +66,3 @@ sudo sed -e "s?%NGROKDOMAIN%?$NGROKDOMAIN?g" --in-place /etc/nginx/sites-availab
 sudo ln -s /etc/nginx/sites-available/$NGROKDOMAIN /etc/nginx/sites-enabled/
 sudo service php5-fpm restart
 sudo service nginx restart
-
-# Setup caldera-ghost-runner and cf-connected-forms
-cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
-cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install --silent && gulp
