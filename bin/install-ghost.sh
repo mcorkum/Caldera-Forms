@@ -46,7 +46,6 @@ cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache &&
 cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && gulp
 
 # Setup and activate cf-result-diff if php7
-# Install if php7
 case "$TRAVIS_PHP_VERSION" in
   7.2|7.1|7.0|nightly)
     cd $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin && composer install && composer update && cd $WP_FOLDER && wp plugin activate cf-result-diff-plugin
