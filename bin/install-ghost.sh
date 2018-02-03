@@ -49,7 +49,6 @@ case "$TRAVIS_PHP_VERSION" in
     ;;
   *)
     echo "PHP version does not support cf-result-diff"
-    exit 1
     ;;
 esac
 
