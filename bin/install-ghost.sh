@@ -35,25 +35,11 @@ git clone https://github.com/CalderaWP/caldera-ghost-runner.git $WP_FOLDER/wp-co
 git clone https://github.com/calderawp/cf-connected-forms $WP_FOLDER/wp-content/plugins/cf-connected-forms
 git clone https://gitlab.com/caldera-labs/cf-result-diff-plugin.git $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin
 
-# Setup and activate cf-result-diff if php7
-# Install if php7
-case "$TRAVIS_PHP_VERSION" in
-  7.2|7.1|7.0|nightly)
-    cd $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin && composer install && composer update && cd $WP_FOLDER && wp plugin activate cf-result-diff-plugin
-    ;;
-  5.6|5.5|5.4|5.3)
-    echo "PHP version does not support cf-result-diff"
-    ;;
-  5.2)
-    echo "PHP version does not support cf-result-diff"
-    ;;
-  *)
-    echo "PHP version does not support cf-result-diff"
-    ;;
-esac
 
 # Activate all downloaded plugins
+echo "hello"
 cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms && wp cgr import
+echo "hello2"
 
 # Copy NGINX config file, enables the site, and restart web server
 cd $TRAVIS_BUILD_DIR
