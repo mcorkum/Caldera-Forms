@@ -99,8 +99,8 @@ before_install:
 
 
 install:
-  - if [ $GHOST ]; then
-      bin/success_message.sh
+  - if [ $GHOST == 1 ]; then
+      bin/install-ghost.sh
     fi
 
 before_script:
