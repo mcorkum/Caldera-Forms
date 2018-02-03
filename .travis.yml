@@ -144,7 +144,7 @@ install:
 
   # Setup caldera-ghost-runner and cf-connected-forms
   - cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
-  - cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && gulp
+  - cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install --silent && gulp
 
   # Setup and activate cf-result-diff if php7
   - |
