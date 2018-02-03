@@ -17,7 +17,7 @@ cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-    - node_modules
+    - /^[^\/]+\/node_modules\/?(?:[^\/]+\/?)*$/gm
 
 php:
   - 5.3
@@ -158,9 +158,8 @@ script:
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
       phpcs
     fi
-  # - sleep 1800
   # Run ghost inspector tests
   - |
     if [[ "$GHOST" == 1 ]] ; then
-       bash bin/install-ghost.sh;
+       cd $WP_FOLDER && wp cgr run
     fi
