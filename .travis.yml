@@ -100,7 +100,7 @@ before_install:
 
 install:
   - if [[ "$GHOST" == 1 ]]; then
-      bash bin/install-ghost.sh
+      bash bin/install-ghost.sh;ß
     fi
 
 before_script:
