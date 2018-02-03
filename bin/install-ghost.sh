@@ -1,9 +1,3 @@
-# Create the databases that will be used in the tests
-mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
-
-# Install Gulp CLI
-npm install --global gulp-cli
-
 # Download json parser for determining ngrok tunnel
 wget https://stedolan.github.io/jq/download/linux64/jq
 chmod +x jq
@@ -41,11 +35,8 @@ git clone https://github.com/CalderaWP/caldera-ghost-runner.git $WP_FOLDER/wp-co
 git clone https://github.com/calderawp/cf-connected-forms $WP_FOLDER/wp-content/plugins/cf-connected-forms
 git clone https://gitlab.com/caldera-labs/cf-result-diff-plugin.git $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin
 
-  # Setup caldera-ghost-runner and cf-connected-forms
-cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
-cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && gulp
-
 # Setup and activate cf-result-diff if php7
+# Install if php7
 case "$TRAVIS_PHP_VERSION" in
   7.2|7.1|7.0|nightly)
     cd $WP_FOLDER/wp-content/plugins/cf-result-diff-plugin && composer install && composer update && cd $WP_FOLDER && wp plugin activate cf-result-diff-plugin
@@ -73,3 +64,7 @@ sudo sed -e "s?%NGROKDOMAIN%?$NGROKDOMAIN?g" --in-place /etc/nginx/sites-availab
 sudo ln -s /etc/nginx/sites-available/$NGROKDOMAIN /etc/nginx/sites-enabled/
 sudo service php5-fpm restart
 sudo service nginx restart
+
+# Setup caldera-ghost-runner and cf-connected-forms
+cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
+cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install --silent && gulp
