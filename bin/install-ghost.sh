@@ -24,7 +24,7 @@ NGROK_URL=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-output .p
 cd $WP_FOLDER
 wp core download --version=$WP_VERSION
 wp config create --dbname="$DB_NAME" --dbuser="root" --dbpass="" --dbhost="127.0.0.1" --dbprefix="$WP_TABLE_PREFIX"
-wp core install --url="$NGROK_URL" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@$NGROKDOMAIN" --skip-email
+wp core install --url="$NGROK_URL" --title="Test" --admin_user="admin" --admin_password="admin" --admin_email="admin@admin.com" --skip-email
 wp core update-db
 wp option update home $NGROK_URL
 wp option update siteurl $NGROK_URL
