@@ -13,6 +13,11 @@ branches:
     - develop
     - /^release\/.*$/
 
+addons:
+  ssh_known_hosts:
+  - gitlab.com
+  - github.com
+
 cache:
   directories:
     - vendor
