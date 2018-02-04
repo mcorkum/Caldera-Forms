@@ -86,19 +86,11 @@ addons:
   - github.com
 
 before_install:
-  # Set up folders
-  - mkdir -p $WP_FOLDER && mkdir tools
-
-  # Install WP-CLI
-  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)/$WP_CLI_FOLDER/ && chmod +x $WP_CLI_FOLDER/wp-cli.phar && mv $WP_CLI_FOLDER/wp-cli.phar $WP_CLI_FOLDER/wp
-
-  # Append the 'tools; folder to the PATH
-  - export PATH=$PATH:$(pwd)/$WP_CLI_FOLDER
-
-  # Prepend the `vendor/bin` folder the PATH
-  - export PATH=vendor/bin:$PATH
-
-install:
+  - echo $CGRGDID
+  - echo $CGRKEY
+  - echo $CGRLOCALAPIKEY
+  - echo $NGORK_AUTH
+  - sleep 1000
   # Remove Xdebug for a huge performance increase:
   - |
     if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
@@ -106,6 +98,16 @@ install:
     else
       echo "xdebug.ini does not exist"
     fi
+
+  # Set up folder for tools
+  - mkdir -p $WP_FOLDER && mkdir tools
+
+  # Install WP-CLI
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)/$WP_CLI_FOLDER/ && chmod +x $WP_CLI_FOLDER/wp-cli.phar && mv $WP_CLI_FOLDER/wp-cli.phar $WP_CLI_FOLDER/wp
+  - export PATH=$PATH:$(pwd)/$WP_CLI_FOLDER
+  - export PATH=vendor/bin:$PATH
+
+install:
   - |
     if [[ "$GHOST" == 1 ]] ; then
        bash bin/install-ghost.sh;
