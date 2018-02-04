@@ -15,12 +15,14 @@ chmod +x ngrok
 ./ngrok authtoken $NGORK_AUTH
 
 # Start ngrok and get URL
+echo "13123123123"
 ./ngrok http 80 > /dev/null &
 sleep 10
 NGROK_URL_RAW=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-output .public_url)
 NGROKDOMAIN="${NGROK_URL_RAW##*/}"
 BASE_URL=http://
 NGROK_URL=$BASE_URL$NGROKDOMAIN
+echo "13123123123"
 
 # install WordPress in the `wordpress` folder
 cd $WP_FOLDER
