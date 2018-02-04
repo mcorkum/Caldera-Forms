@@ -27,7 +27,6 @@ env:
     - WP_TABLE_PREFIX="wp_"
     - WP_CLI_FOLDER="tools"
     - WP_VERSION=latest WP_MULTISITE=0 GHOST=0
-    - NODE_JS_VERSION=4.8.6
 
 matrix:
   include:
@@ -100,9 +99,8 @@ before_install:
   - export PATH=vendor/bin:$PATH
 
   # Change node version
-  - curl -o ~/.nvm/nvm.sh https://raw.githubusercontent.com/creationix/nvm/v0.31.0/nvm.sh # update nvm
-  - bash -c "nvm use $NODE_JS_VERSION" || true
-  - bash -c "source ~/.nvm/nvm.sh; nvm install $NODE_JS_VERSION; node --version"
+  - npm i -g npm@4
+  - npm -v
 
 install:
   # Remove Xdebug for a huge performance increase:
