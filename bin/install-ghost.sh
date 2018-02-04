@@ -22,7 +22,8 @@ NGROK_URL_RAW=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-outpu
 
 echo $NGROK_URL_RAW
 
-$NGROKDOMAIN="${$NGROK_URL_RAW##*/}"
+
+$NGROKDOMAIN=$("$NGROK_URL_RAW" | sed 's/https\?:\/\///')
 
 echo $NGROKDOMAIN
 
