@@ -22,7 +22,10 @@ NGROK_URL_RAW=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-outpu
 
 echo $NGROK_URL_RAW
 
-$NGROKDOMAIN="${NGROK_URL_RAW##*/}"
+$NGROKDOMAIN="${$NGROK_URL_RAW##*/}"
+
+echo $NGROKDOMAIN
+
 $BASE_URL=http://
 $NGROK_URL=$BASE_URL$NGROKDOMAIN
 echo "13123123123"
