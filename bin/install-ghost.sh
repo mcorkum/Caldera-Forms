@@ -18,9 +18,9 @@ chmod +x ngrok
 echo "13123123123"
 ./ngrok http 80 > /dev/null &
 sleep 10
-$NGROK_URL_RAW=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-output .public_url)
+NGROK_URL_RAW=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-output .public_url)
 
-
+echo NGROK_URL_RAW
 
 $NGROKDOMAIN="${NGROK_URL_RAW##*/}"
 $BASE_URL=http://
