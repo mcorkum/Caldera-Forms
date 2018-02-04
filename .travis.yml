@@ -3,6 +3,9 @@ dist: trusty
 
 language: php
 
+node_js:
+  - "8.9.1"
+
 notifications:
   email:
     on_success: never
