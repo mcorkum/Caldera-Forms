@@ -6,6 +6,7 @@ npm install --global gulp-cli
 echo "here"
 npm rebuild node-sass
 
+
 # Download json parser for determining ngrok tunnel
 wget https://stedolan.github.io/jq/download/linux64/jq
 chmod +x jq
