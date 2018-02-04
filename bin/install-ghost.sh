@@ -53,7 +53,7 @@ esac
 
 # Setup caldera-ghost-runner and cf-connected-forms
 cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
-cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && npm install gulp-cli && gulp
+cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && npm install --global gulp-cli && gulp
 
 # Activate all downloaded plugins
 cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms
