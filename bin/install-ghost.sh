@@ -2,9 +2,9 @@
 mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
 
 # Install Gulp CLI rebuild node sass
-npm install -g npm@latest
-npm -v
+npm cache clean
 npm install --global gulp-cli
+npm install --global node-sass
 
 
 # Download json parser for determining ngrok tunnel
