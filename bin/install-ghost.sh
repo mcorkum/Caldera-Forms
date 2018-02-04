@@ -1,9 +1,6 @@
 # Create the databases that will be used in the tests
 mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
 
-# Install Gulp CLI rebuild node sass
-npm cache clean
-
 # Download json parser for determining ngrok tunnel
 wget https://stedolan.github.io/jq/download/linux64/jq
 chmod +x jq
@@ -15,7 +12,6 @@ chmod +x ngrok
 ./ngrok authtoken $NGORK_AUTH
 
 # Start ngrok and get URL
-echo "13123123123"
 ./ngrok http -bind-tls=false 80 > /dev/null &
 sleep 10
 NGROK_URL=$(curl -s localhost:4040/api/tunnels/command_line | jq --raw-output .public_url)
@@ -57,7 +53,7 @@ esac
 
 # Setup caldera-ghost-runner and cf-connected-forms
 cd $WP_FOLDER/wp-content/plugins/caldera-ghost-runner && composer clear-cache && composer install && composer update
-cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm rebuild node-sass --force && npm install --silent && gulp
+cd $WP_FOLDER/wp-content/plugins/cf-connected-forms && composer install && composer update && npm install && npm install gulp-cli && gulp
 
 # Activate all downloaded plugins
 cd $WP_FOLDER && wp plugin activate caldera-forms && wp plugin activate caldera-ghost-runner && wp plugin activate cf-connected-forms

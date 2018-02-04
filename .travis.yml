@@ -98,10 +98,6 @@ before_install:
   # Prepend the `vendor/bin` folder the PATH
   - export PATH=vendor/bin:$PATH
 
-  # Change node version
-  - npm i -g npm@latest
-  - npm -v
-
 install:
   # Remove Xdebug for a huge performance increase:
   - |
