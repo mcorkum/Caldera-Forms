@@ -3,7 +3,8 @@ mysql -e "create database IF NOT EXISTS $DB_NAME;" -uroot
 
 # Install Gulp CLI rebuild node sass
 npm install --global gulp-cli
-npm rebuild node-sass;
+echo "here"
+npm rebuild node-sass
 
 # Download json parser for determining ngrok tunnel
 wget https://stedolan.github.io/jq/download/linux64/jq
