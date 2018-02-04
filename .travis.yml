@@ -99,7 +99,7 @@ before_install:
   - export PATH=vendor/bin:$PATH
 
   # Change node version
-  - npm i -g npm@4
+  - npm i -g npm@latest
   - npm -v
 
 install:
